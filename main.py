@@ -29,7 +29,7 @@ def getPastSales():
         past_sales_tab.click()
 
         # Wait for the table to load after clicking the tab
-    # wait.until(EC.presence_of_element_located((By.XPATH, "//table")))  # Change the XPATH to the actual table's identifier
+        # wait.until(EC.presence_of_element_located((By.XPATH, "//table")))  # Change the XPATH to the actual table's identifier
         time.sleep(5)
         # Step 2: Parse the HTML content
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -102,8 +102,15 @@ def getActiveSales():
     # Step 6: Convert to a pandas DataFrame (optional)
     df = pd.DataFrame(rows)
 
-    # Print the DataFrame
-    print(df)
+    df['Ba'] = pd.to_numeric(df['Ba'], errors='coerce')
+    df.dropna(subset=['Ba'], inplace=True)
+    # Convert 'Ba' column to integer
+    df['Ba'] = df['Ba'].astype(int)        
 
-#print(getPastSales())
+    filtered_df = df[df['Ba'] < 2]
+    print(filtered_df)
+
+print(getPastSales())
+print("=======================================================================================================================================")
+time.sleep(5)
 print(getActiveSales())
