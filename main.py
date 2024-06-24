@@ -110,6 +110,10 @@ def getActiveSales():
     filtered_df = df[df['Ba'] < 2]
     print(filtered_df)
 
+def sendEmail():
+    #TODO: write code to send an email
+    print("In Progress")
+
 print(getPastSales())
 print("=======================================================================================================================================")
 time.sleep(5)
